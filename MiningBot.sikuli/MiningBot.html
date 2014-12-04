@@ -1,0 +1,103 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>MiningBot.sikuli</h2> <a href="MiningBot.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="cmt">#Outer determines the number of inventories to fill and drop (Also prevent infinite loop)
+</span>outer = <span class="dig">1</span>
+<span class="kw">while</span> outer &lt; <span class="dig">3</span> :
+    inner = <span class="dig">1</span>
+    <span class="kw">while</span> inner &lt; <span class="dig">13</span> :
+        <span class="kw">if</span>(exists(Pattern(<img src="1417726985376.png" />).similar(<span class="dig">0.56</span>))) :
+            <span class="skw">click</span>(Pattern(<img src="1417726985376.png" />).similar(<span class="dig">0.56</span>))
+            <span class="skw">sleep</span>(<span class="dig">2.25</span>)
+            <span class="kw">try</span>:
+                <span class="skw">click</span>(Pattern(<img src="1417727011582.png" />).similar(<span class="dig">0.44</span>))
+            <span class="kw">except</span>:
+                <span class="skw">sleep</span>(<span class="dig">.5</span>)
+            <span class="skw">sleep</span>(<span class="dig">7</span>)
+        inner = inner+<span class="dig">1</span>
+
+    <span class="cmt">#Loop to drop all ores (stop used to prevent infinite loop)
+</span>    stop = <span class="dig">0</span>
+    <span class="kw">while</span> (exists(Pattern(<img src="1417726684611.png" />).similar(<span class="dig">0.95</span>)) <span class="kw">and</span> stop &lt; <span class="dig">40</span>):
+        <span class="kw">try</span>:
+            <span class="skw">rightClick</span>(Pattern(<img src="1417726684611.png" />).similar(<span class="dig">0.95</span>))
+            <span class="skw">sleep</span>(<span class="dig">.25</span>)
+            <span class="skw">click</span>(Pattern(<img src="Screen Shot 2014-12-04 at 2.58.57 PM.png" />).similar(<span class="dig">0.39</span>).targetOffset(-<span class="dig">25</span>,-<span class="dig">7</span>))
+            <span class="skw">sleep</span>(<span class="dig">.25</span>)
+        <span class="kw">except</span>:
+            <span class="skw">sleep</span>(<span class="dig">.5</span>)
+        stop = stop + <span class="dig">1</span>;
+        <span class="cmt">#TODO Add logic to drop gems
+</span>    outer = outer + <span class="dig">1</span>
+</pre>
+</body>
+</html>
