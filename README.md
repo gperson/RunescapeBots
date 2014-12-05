@@ -10,5 +10,5 @@ RuneScape is a fantasy massively multiplayer online role-playing game, this repo
 
 ## Running a bot
 1. Sign into Runescape
-2. Take your character to the location and position them as found {here}.
+2. Take your character to the location and position them as found [here](https://github.com/gperson/RunescapeBots/wiki/Player-location-snd-setup).
 3. Click run on the SikuliIDE
