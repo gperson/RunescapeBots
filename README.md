@@ -1,6 +1,6 @@
 RunescapeBots
 =============
-RuneScape is a fantasy massively multiplayer online role-playing game, this repository will hold bots for the game created using Sikuli.  Although I probably won't use them and no longer play the game, thought it would be fun to play around with Sikuli and create something 'useful'.
+RuneScape is a fantasy massively multiplayer online role-playing game, this repository will hold bots for the game created using Sikuli.  Although I probably won't use them and no longer play the game, thought it would be fun to play around with Sikuli/python and create something 'useful'.
 
 ## Setup
 1. Fork and clone this project to your machine
