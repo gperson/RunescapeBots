@@ -71,33 +71,53 @@
 </div>
 <pre class="sikuli-code">
 <span class="cmt">#Outer determines the number of inventories to fill and drop (Also prevent infinite loop)
-</span>outer = <span class="dig">3</span>
+</span>pickUpRune = True <span class="cmt">#flag for if you want to pick up rune, faster if false</span>
+outer = <span class="dig">4</span>
 <span class="kw">while</span> outer &gt; <span class="dig">0</span> :
-    inner = <span class="dig">1</span>
-    <span class="kw">while</span> inner &lt; <span class="dig">13</span> :
-        <span class="kw">if</span>(exists(Pattern(<img src="ore-1.png" />).similar(<span class="dig">0.56</span>))) :
-            <span class="skw">click</span>(Pattern(<img src="ore-1.png" />).similar(<span class="dig">0.56</span>))
-            <span class="skw">sleep</span>(<span class="dig">2.25</span>)
-            <span class="kw">try</span>:
-                <span class="skw">click</span>(Pattern(<img src="ore-2.png" />).similar(<span class="dig">0.44</span>))
-            <span class="kw">except</span>:
-                <span class="skw">sleep</span>(<span class="dig">.5</span>)
-            <span class="skw">sleep</span>(<span class="dig">7</span>)
-        inner = inner+<span class="dig">1</span>
+    notFull = True
+    stop = <span class="dig">0</span>
+    <span class="kw">while</span> (notFull <span class="kw">and</span> stop &lt; <span class="dig">40</span>):
+        foundRune = False
+        <span class="kw">if</span>(exists(<img src="iron-ore-1.png" />)) :
+            <span class="kw">if</span> foundRune :
+                <span class="skw">sleep</span>(<span class="dig">3.5</span>) <span class="cmt">#Time to run back from getting the rune</span>
+                foundRune = False
+            <span class="skw">click</span>(Pattern(<img src="iron-ore-1.png" />).similar(<span class="dig">0.75</span>))
+            <span class="skw">sleep</span>(<span class="dig">1.75</span>) <span class="cmt">#Time it takes to get the ore</span>
+        <span class="kw">if</span>(exists(Pattern(<img src="iron-ore-2.png" />).similar(<span class="dig">0.75</span>))) :
+            <span class="skw">click</span>(Pattern(<img src="iron-ore-2.png" />).similar(<span class="dig">0.75</span>))
+            <span class="skw">sleep</span>(<span class="dig">1.75</span>) <span class="cmt">#Time it takes to get the ore</span>
 
-    <span class="cmt">#Loop to drop all ores (stop used to prevent infinite loop)
+        <span class="kw">if</span>(stop % <span class="dig">6</span> == <span class="dig">0</span> <span class="kw">and</span> pickUpRune):
+            <span class="kw">if</span>(exists(Pattern(<img src="fire-rune.png" />).similar(<span class="dig">0.60</span>))) : <span class="cmt">#Check ever other cycle, increase productivity</span>
+                <span class="skw">click</span>(Pattern(<img src="fire-rune.png" />).similar(<span class="dig">0.60</span>))
+                foundRune = True
+                <span class="skw">sleep</span>(<span class="dig">1.5</span>) <span class="cmt">#Time it takes to run and get the rune</span>
+        <span class="kw">else</span> :
+            <span class="skw">sleep</span>(<span class="dig">1</span>)
+        <span class="kw">if</span>(stop &gt; <span class="dig">11</span>): <span class="cmt">#Check if full only after 11 cycles, increase productivity</span>
+
+            <span class="kw">if</span>(False): <span class="cmt">#TODO Check for gems</span>
+                <span class="kw">if</span>(exists(<img src="sapphire.png" />)):
+                    <span class="skw">sleep</span>(<span class="dig">.05</span>)<span class="cmt">#TODO drop</span>
+                <span class="kw">if</span>(exists(<img src="emerald.png" />)):
+                    <span class="skw">sleep</span>(<span class="dig">.05</span>)<span class="cmt">#TODO drop</span>
+
+            <span class="kw">if</span>(exists(Pattern(<img src="full-inventory.png" />).similar(<span class="dig">0.75</span>))):
+                notFull = False
+        stop = stop + <span class="dig">1</span>
+    <span class="cmt">#Loop to drop all ores 
 </span>    stop = <span class="dig">0</span>
-    <span class="kw">while</span> (exists(Pattern(<img src="action-ore.png" />).similar(<span class="dig">0.95</span>)) <span class="kw">and</span> stop &lt; <span class="dig">40</span>):
+    <span class="kw">while</span> (stop &lt; <span class="dig">26</span>):
         <span class="kw">try</span>:
-            <span class="skw">rightClick</span>(Pattern(<img src="action-ore.png" />).similar(<span class="dig">0.95</span>))
-            <span class="skw">sleep</span>(<span class="dig">.25</span>)
+            <span class="skw">rightClick</span>(Pattern(<img src="action-ore.png" />).similar(<span class="dig">0.65</span>))
+            <span class="skw">sleep</span>(<span class="dig">.1</span>)
             <span class="skw">click</span>(Pattern(<img src="action-ore-menu.png" />).similar(<span class="dig">0.39</span>).targetOffset(-<span class="dig">25</span>,-<span class="dig">7</span>))
-            <span class="skw">sleep</span>(<span class="dig">.25</span>)
+            <span class="skw">sleep</span>(<span class="dig">.1</span>)
         <span class="kw">except</span>:
-            <span class="skw">sleep</span>(<span class="dig">.5</span>)
+            <span class="skw">sleep</span>(<span class="dig">.25</span>)
         stop = stop + <span class="dig">1</span>;
-        <span class="cmt">#TODO Add logic to drop gems
-</span>    outer = outer - <span class="dig">1</span>
+    outer = outer - <span class="dig">1</span>
 </pre>
 </body>
 </html>
