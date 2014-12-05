@@ -1,6 +1,6 @@
 #Outer determines the number of inventories to fill and drop (Also prevent infinite loop)
-outer = 1
-while outer < 3 :
+outer = 3
+while outer > 0 :
     inner = 1
     while inner < 13 :      
         if(exists(Pattern("ore-1.png").similar(0.56))) :        
@@ -25,4 +25,4 @@ while outer < 3 :
             sleep(.5)
         stop = stop + 1;
         #TODO Add logic to drop gems
-    outer = outer + 1
+    outer = outer - 1
